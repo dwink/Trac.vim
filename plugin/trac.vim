@@ -132,10 +132,14 @@ if !has("python")
     finish
 endif
 
+let s:sfile = expand('<sfile>:h') . '/trac.py'
+
 if filereadable($VIMRUNTIME."/plugin/trac.py")
   pyfile $VIMRUNTIME/plugin/trac.py
 elseif filereadable($HOME."/.vim/plugin/trac.py")
   pyfile $HOME/.vim/plugin/trac.py
+elseif filereadable(s:sfile)
+  pyfile <sfile>:h/trac.py
 else
   call confirm('trac.vim: Unable to find trac.py. Place it in either your home vim directory or in the Vim runtime directory.', 'OK')
   finish
